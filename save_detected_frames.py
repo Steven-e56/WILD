@@ -1,7 +1,11 @@
 from ultralytics import YOLO
 import cv2
 import os
-
+'''
+this code does the following
+- detects person
+- saves frames to a folder in the same directory
+'''
 # Load your trained model
 model = YOLO('C:/Users/m272514/Desktop/roboflow_dataset_v2/runs/detect/train/weights/best.pt')
 
