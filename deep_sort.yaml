@@ -1,0 +1,18 @@
+# Ultralytics YOLOv8 + DeepSORT tracker config
+
+tracker_type: deep_sort
+model_cfg: ultralytics/cfg/trackers/deep_sort/deep_sort.yaml
+model_weights: https://github.com/mikel-brostrom/Yolov5_DeepSort_Pytorch/releases/download/weights/osnet_x0_25_msmt17.pt
+
+# Settings
+max_dist: 0.2
+min_confidence: 0.3
+nms_max_overlap: 1.0
+max_iou_distance: 0.7
+max_age: 70
+n_init: 3
+nn_budget: 100
+mc_lambda: 0.995
+ema_alpha: 0.9
+
+# Optional: reid_model path can be replaced with a local .pt file if not using URL
