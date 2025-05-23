@@ -68,7 +68,7 @@ Triage level:
             return level
     except Exception:
         pass
-    return 3  # fallback moderate
+    return 3  # fallback (moderate)
 
 def embed_caption_and_triage(image_path, caption, triage_level):
     img = Image.open(image_path)
