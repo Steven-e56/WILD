@@ -42,11 +42,17 @@ def embed_description_in_image(image_path, description):
 
 
 # Folder watcher (background)
+# updated to exit at the end of the folder
+
 def watch_folder():
     while True:
-        for filename in os.listdir(INPUT_FOLDER):
-            if not filename.endswith(".jpeg"):
-                continue
+        jpeg_files = [f for f in os.listdir(INPUT_FOLDER) if f.endswith(".jpeg")]
+        
+        if not jpeg_files:
+            print("[INFO] No more .jpeg files found. Stopping watcher.")
+            break  # Stop the thread when folder is empty
+
+        for filename in jpeg_files:
             path = os.path.join(INPUT_FOLDER, filename)
             try:
                 pil_img = Image.open(path).convert("RGB")
@@ -61,8 +67,8 @@ def watch_folder():
                 os.rename(path, os.path.join(PROCESSED_FOLDER, filename))
             except Exception as e:
                 print(f"[ERROR] {filename} → {e}")
-        time.sleep(2)  # Check every 2 sec
-
+        
+        time.sleep(2)  # Brief wait before next scan
 
 # Start folder watcher in background
 threading.Thread(target=watch_folder, daemon=True).start()
