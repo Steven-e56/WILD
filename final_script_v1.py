@@ -54,7 +54,7 @@ You are a triage assistant. Based on the description of a person from an image, 
 2 = Serious
 3 = Moderate
 4 = Minor
-5 = Deceased
+5 = Uninjured
 
 ONLY return the number, no explanation.
 
