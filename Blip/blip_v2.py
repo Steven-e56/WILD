@@ -5,6 +5,7 @@ import numpy as np
 from PIL import Image
 from transformers import BlipProcessor, BlipForConditionalGeneration
 import gradio as gr
+import piexif
 
 # Initialize BLIP
 processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
