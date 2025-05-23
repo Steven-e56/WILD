@@ -27,7 +27,7 @@ def generate_caption(img):
 def watch_folder():
     while True:
         for filename in os.listdir(INPUT_FOLDER):
-            if not filename.endswith(".jpg"):
+            if not filename.endswith(".jpeg"):
                 continue
             path = os.path.join(INPUT_FOLDER, filename)
             try:

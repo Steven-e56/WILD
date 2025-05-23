@@ -28,7 +28,7 @@ def send_image_to_blip(image_path):
 
 def process_images():
     while True:
-        image_files = [f for f in os.listdir(INPUT_FOLDER) if f.endswith(".jpg")]
+        image_files = [f for f in os.listdir(INPUT_FOLDER) if f.endswith(".jpeg")]
         for filename in image_files:
             image_path = os.path.join(INPUT_FOLDER, filename)
             try:
