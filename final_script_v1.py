@@ -21,7 +21,8 @@ VIDEO_SOURCE = 0
 
 # LLaMA model config
 LLAMA_MODEL_NAME = "Meta-Llama-3-8B-Instruct.Q4_0.gguf"
-LLAMA_MODEL_PATH = r"C:\Users\zachary.daher\AppData\Local\nomic.ai\GPT4All"
+    # Folder where GPT4All scripts are
+LLAMA_MODEL_PATH = "C:/Users/m272514/Desktop/GPT4All"
 
 # === Initialize models ===
 
