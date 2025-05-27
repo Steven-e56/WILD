@@ -6,7 +6,7 @@ import os
 model = YOLO("C:/Users/m272514/Desktop/roboflow_dataset_v2/runs/detect/train/weights/best.pt")
 
 # Set video source (0, 1, etc.)
-source = "C:/Users/m272514/Videos/Hacksaw_ridge.mp4"
+source = "C:/Users/m272514/Videos/sample_video_short.mp4"
 cap = cv2.VideoCapture(source)
 
 # Output folder

@@ -11,7 +11,7 @@ processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base
 model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 
 # Folder settings
-INPUT_FOLDER = "saved_frames"
+INPUT_FOLDER = "C:/Users/m272514/Desktop/Wild_APL_Project/WILD/saved_frames"
 PROCESSED_FOLDER = os.path.join(INPUT_FOLDER, "processed")
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 
@@ -71,15 +71,15 @@ def watch_folder():
             try:
                 pil_img = Image.open(path).convert("RGB")
                 caption = generate_caption(pil_img)
-                print(f"[AUTO] {filename} → {caption}")
+                print(f"[AUTO] {filename} -> {caption}")
 
                 # Embed caption into the image
                 embed_description_in_image(path, caption)
-
+                
                 # Move to processed folder to avoid re-processing
                 os.rename(path, os.path.join(PROCESSED_FOLDER, filename))
             except Exception as e:
-                print(f"[ERROR] {filename} → {e}")
+                print(f"[ERROR] {filename} -> {e}")
 
         time.sleep(2)  # Check every 2 seconds
 
