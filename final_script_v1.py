@@ -17,7 +17,7 @@ os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 
 # YOLO model and video source (webcam 0 or path)
 YOLO_MODEL_PATH = "C:/Users/m272514/Desktop/roboflow_dataset_v2/runs/detect/train/weights/best.pt"
-VIDEO_SOURCE = 0
+VIDEO_SOURCE = 1
 
 # LLaMA model config
 LLAMA_MODEL_NAME = "base_llama_model.gguf"
@@ -96,7 +96,7 @@ cap = cv2.VideoCapture(VIDEO_SOURCE)
 
 def process_frame(frame):
     global seen_ids
-    results = yolo_model.track(frame, persist=True, tracker="deep_sort.yaml", verbose=False)
+    results = yolo_model.track(frame, persist=True, tracker="bytetrack.yaml", verbose=False)
     boxes = results[0].boxes
     saved = False
 

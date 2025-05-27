@@ -22,16 +22,25 @@ def read_caption(image_path):
         return caption_bytes.decode("utf-8")
     return ""
 
+# === Helper: Check if triage already embedded ===
+def has_triage_tag(image_path):
+    try:
+        exif = piexif.load(image_path)
+        user_comment = exif["Exif"].get(piexif.ExifIFD.UserComment, b"")
+        return b"Triage Level" in user_comment
+    except Exception:
+        return False
+
 # === Helper: Generate triage level from caption ===
 def classify_triage_level(caption):
     prompt = f"""
 You are a triage assistant. Based on the description of a person from an image, return a single triage level from 1 to 5:
 
-1 = Critical (requires immediate attention)
-2 = Serious
-3 = Moderate
-4 = Minor
-5 = Deceased
+1 = Critical (requires immediate attention)  
+2 = Serious  
+3 = Moderate  
+4 = Minor  
+5 = Uninjured
 
 ONLY return the number, no explanation.
 
@@ -45,7 +54,7 @@ Triage level:
             return level
     except Exception:
         pass
-    # fallback
+    # fallback if parsing fails
     return 3
 
 # === Helper: Embed caption and triage separately ===
@@ -69,9 +78,14 @@ print("[INFO] Processing images for triage classification...")
 for filename in os.listdir(INPUT_FOLDER):
     if not filename.lower().endswith(".jpeg"):
         continue
+
     path = os.path.join(INPUT_FOLDER, filename)
 
     try:
+        if has_triage_tag(path):
+            print(f"[SKIP] {filename} already has triage level.")
+            continue
+
         caption = read_caption(path)
         if not caption:
             print(f"[WARN] No caption found in {filename}, skipping.")
