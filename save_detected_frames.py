@@ -6,7 +6,7 @@ import os
 model = YOLO("C:/Users/m272514/Desktop/roboflow_dataset_v2/runs/detect/train/weights/best.pt")
 
 # Set video source (0, 1, etc.)
-source = 1
+source = "C:/Users/m272514/Videos/Hacksaw_ridge.mp4"
 cap = cv2.VideoCapture(source)
 
 # Output folder
@@ -16,6 +16,9 @@ os.makedirs(output_folder, exist_ok=True)
 # Track seen person IDs
 seen_ids = set()
 frame_id = 0
+
+# Set labels you want to flag
+people_labels = ["Human", "Human feet", "Person", "face", "person", "person dataset - v1 2023-11-16 1-49am"]
 
 while True:
     ret, frame = cap.read()
@@ -36,7 +39,7 @@ while True:
             track_id = int(boxes.id[i])
             class_id = int(boxes.cls[i])
 
-            if model.names[class_id] == 'person' and track_id not in seen_ids:
+            if model.names[class_id] in people_labels and track_id not in seen_ids:
                 seen_ids.add(track_id)
                 save_path = os.path.join(output_folder, f'person_{track_id:06d}.jpeg')
                 # Save raw frame without bounding boxes
