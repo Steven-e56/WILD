@@ -1,0 +1,9 @@
+opencv-python
+Pillow
+torch
+torchvision
+transformers
+ultralytics
+accelerate
+sentencepiece
+streamlit
